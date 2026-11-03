@@ -40,4 +40,6 @@ Comprehensive Documentation Index: [`docs/README.md`](docs/README.md)
   - [Roadmap](docs/planning/roadmap.md)
   - [Risks & Tradeoffs](docs/planning/risks-and-tradeoffs.md)
   - [Open Questions](docs/planning/open-questions.md)
+  - [Open Questions Playbook & Gap Analysis](docs/planning/open-questions-playbook.md)
   - [Architectural Decision Records (ADRs)](docs/adr/README.md)
+

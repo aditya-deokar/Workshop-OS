@@ -2,7 +2,7 @@
 
 Each question lists **why it matters** and **what it blocks**. P0 must be answered before Phase 0 spikes finish. P1 before Phase 4 (integrations). P2 before go-live.
 
-Related: [risks-and-tradeoffs.md](risks-and-tradeoffs.md) · [roadmap.md](roadmap.md)
+Related: [risks-and-tradeoffs.md](risks-and-tradeoffs.md) · [roadmap.md](roadmap.md) · **[open-questions-playbook.md](open-questions-playbook.md): what we build for each possible answer, and the defaults if a question is still unanswered**
 
 ---
 

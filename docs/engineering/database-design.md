@@ -25,8 +25,14 @@ ER overview: [diagrams.md §9](../architecture/diagrams.md#9-database-er-diagram
 ```text
 workshop_status        : draft | ready | publishing | published | published_with_issues | in_progress | completed | cancelled | archived
 automation_state       : inactive | active | paused | stopped
-execution_status       : pending | waiting | scheduled | running | retrying | succeeded | failed | skipped
-                         | cancelled | paused | awaiting_confirmation | needs_attention | accepted
+execution_status       : pending | waiting | scheduled | running | retrying | succeeded | succeeded_with_errors
+                         | failed | skipped | cancelled | paused | blocked | awaiting_confirmation
+                         | needs_attention | accepted
+status_reason          : superseded | stopped | emergency_stopped | paused_by_admin | dependency_unsatisfied
+                         | dependency_critical_failed | capability_missing | deadline_exceeded | missed_window
+                         | no_consent | invalid_recipient | frequency_capped | quiet_hours | unknown_outcome
+                         | auth_error | manual_override | skipped_by_admin | rehearsal_redirected
+                         (column `status_reason` on every execution table; see playbook G-04)
 registration_status    : pending | needs_review | pending_payment | confirmed | waitlisted | cancelled | refunded
 payment_status         : not_required | unpaid | pending | paid | refunded | failed | unknown
 completion_status      : not_evaluated | completed | not_completed | manual_review | exempt

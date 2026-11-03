@@ -1,6 +1,6 @@
 # ADR-007: Per-activity durable runs, generation fencing, and a Postgres sweeper
 
-- Status: Accepted
+- Status: Accepted, **amended by [ADR-013](013-recovery-events-and-check-wait-loops.md)**. Step 4 (sweeper) now uses a separate recovery event/function, because same-`runId` re-emission is suppressed by function idempotency.
 - Date: 2026-11-03
 
 ## Context

@@ -80,12 +80,14 @@ docs/
 │   ├── 009-react-vite-spa-instead-of-nextjs.md
 │   ├── 010-realtime-sse-with-postgres-notify.md
 │   ├── 011-google-sheets-sync-ownership.md
-│   └── 012-unknown-outcome-no-auto-retry.md
+│   ├── 012-unknown-outcome-no-auto-retry.md
+│   └── 013-recovery-events-and-check-wait-loops.md
 └── planning/
     ├── product-requirements.md                 Consolidated PRD and functional requirements
     ├── roadmap.md                              Phases, feature dependency graph, implementation order, MVP vs future
     ├── risks-and-tradeoffs.md                  Technical risks, assumptions, trade-offs
-    └── open-questions.md                       Prioritized questions for the client
+    ├── open-questions.md                       Prioritized questions for the client
+    └── open-questions-playbook.md              What we build for each possible answer + gap analysis (G-01…G-27)
 ```
 
 ### Mapping to the originally requested numbered documents

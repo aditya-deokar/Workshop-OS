@@ -10,12 +10,13 @@ ADRs capture decisions that are expensive to reverse. Each ADR is immutable once
 | [004](004-integration-adapter-pattern.md) | Integration adapter pattern with capability registry | Accepted |
 | [005](005-nestjs-inngest-express-serve.md) | Serve Inngest via `inngest/express` inside NestJS | Accepted (pending SPIKE S1) |
 | [006](006-auth-better-auth-and-body-parsing.md) | Better Auth + per-route body parsing | Accepted (pending SPIKE S2) |
-| [007](007-timeline-scheduling-strategy.md) | Per-activity durable runs + generation fencing + sweeper | Accepted |
+| [007](007-timeline-scheduling-strategy.md) | Per-activity durable runs + generation fencing + sweeper | Accepted, amended by 013 |
 | [008](008-workflow-versioning.md) | Immutable workflow versions; executions pin versions | Accepted |
 | [009](009-react-vite-spa-instead-of-nextjs.md) | React + Vite SPA instead of Next.js | Accepted |
 | [010](010-realtime-sse-with-postgres-notify.md) | SSE + Postgres LISTEN/NOTIFY for realtime | Accepted |
 | [011](011-google-sheets-sync-ownership.md) | Column-ownership model for Google Sheets sync | Proposed ([CONFIRM Q3](../planning/open-questions.md)) |
 | [012](012-unknown-outcome-no-auto-retry.md) | No automatic retry on unknown outcome for non-idempotent providers | Accepted |
+| [013](013-recovery-events-and-check-wait-loops.md) | Recovery events, check-wait-recheck loops, retries rule | Accepted (amends 007) |
 
 ## Template
 

@@ -91,7 +91,7 @@ Decision: [ADR-007](../adr/007-timeline-scheduling-strategy.md). Summary:
 - **Disarming** (reschedule/disable/stop) bumps the generation and emits `timeline/activity.disarmed`. `cancelOn` cancels sleeping runs, and the claim check fences any run that escapes cancellation.
 - **Cron jobs** (Inngest):
   - `timeline-arming-sweep`: daily at 00:05 UTC, plus on activation. Arms activities entering the horizon.
-  - `timeline-overdue-sweeper`: every minute. Re-emits overdue `scheduled` runs (same `runId`, deduped). Escalates if overdue twice.
+  - `timeline-overdue-sweeper`: every minute. For overdue `scheduled` runs, it increments `recovery_attempts` and emits `timeline/activity.recover`, handled by a separate recovery function. The claim fence prevents double execution. Escalates after 2 attempts ([ADR-013](../adr/013-recovery-events-and-check-wait-loops.md)).
 - **Watchdog** (api role, alert-only): overdue more than 5 min → critical alert.
 
 ### 6.1 Event-mode activities
@@ -126,8 +126,9 @@ Function `timeline-activity-execute` (one run per armed activity run):
          a. step "resolve-audience" → registration IDs (filter, exclude already-succeeded for same activity)
          b. if trigger.supports_bulk → chunk (e.g. 100) → gateway.call per chunk
             else step.sendEvent fan-out `comms/send.requested` (id = runId:registrationId) → child function
-         c. step.waitForEvent("fanout-complete", timeout = deadline) — the child aggregator emits
-            `timeline/fanout.completed` when all children are terminal (counter in activity_runs.outcome_summary)
+         c. check-wait-recheck loop (ADR-013): step "check-i" reads the counter in activity_runs.outcome_summary;
+            if not all children are terminal → step.waitForEvent("wait-i", fanout.completed, timeout 5m) → re-check;
+            repeat until done or deadline. The child aggregator emits `timeline/fanout.completed` as an accelerator only
 6. step "evaluate-success": apply success_condition (e.g. ≥ 95% accepted) → succeeded | failed
 7. step "finalize": TX update run + activity.current_status, outbox `timeline/activity.completed {outcome}`, notify SSE
 ```

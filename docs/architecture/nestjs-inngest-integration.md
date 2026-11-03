@@ -110,7 +110,8 @@ export class TimelineFunctions {
         cancelOn: [{ event: activityDisarmed,
           if: 'async.data.activityId == event.data.activityId && async.data.generation >= event.data.generation' }],
         concurrency: [{ key: 'event.data.workshopId', limit: 10 }],
-        retries: 0,                                  // retries handled per action step
+        retries: 4,                                  // for unexpected errors only; provider attempts return
+                                                     // classified outcomes and use our own attempt loop (ADR-013)
       },
       async ({ event, step }) => {
         await step.sleepUntil('wait-until-due', event.data.scheduledFor);
